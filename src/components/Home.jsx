@@ -1,6 +1,18 @@
-import Product from "./Product";
+import { useDispatch, useSelector } from 'react-redux'
+import Product from './Product'
+import { useEffect } from 'react'
+import { fetchProductsAsync } from '../Redux/productSlice'
 
 function Home() {
+  const dispatch = useDispatch()
+  const { lists } = useSelector((state) => state.products)
+
+  console.log(lists)
+
+  useEffect(() => {
+    console.log('working')
+    dispatch(fetchProductsAsync())
+  }, [])
   return (
     <>
       <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
@@ -11,7 +23,7 @@ function Home() {
         </section>
       </section>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home
